@@ -18,7 +18,7 @@ export class ArticlePage extends React.Component {
   render() {
     const { articleInfo } = this.state;
     return (
-      <div>
+      <div className="articlepage">
         <h3>Article info...</h3>
         {articleInfo && (
           <div>

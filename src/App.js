@@ -6,8 +6,9 @@ import { Header } from './Components/Header/Header';
 import { Router } from '@reach/router';
 import { Home } from './Components/Home';
 import { Articles } from './Components/Articles/Articles';
-import { Topics } from './Components/Topics';
+import { Topics } from './Components/Topics/Topics';
 import { ArticlePage } from './Components/Articles/ArticlePage';
+import { TopicPage } from './Components/Topics/TopicPage';
 
 class App extends Component {
   state = {
@@ -30,6 +31,12 @@ class App extends Component {
           <Articles article={this.state.articlesList} path="/articles" />
           <ArticlePage path="/articles/:articleid" />
           <Topics path="/topics" />
+          {this.state.articlesList && (
+            <TopicPage
+              articles={this.state.articlesList}
+              path="/topics/:slug"
+            />
+          )}
         </Router>
       </div>
     );

@@ -1,8 +1,8 @@
 .App {
+  height: 100vh;
   /* display: grid;
   grid-template-columns: 10% 80% 10%;
   grid-template-rows: 10% 80% 10%;
-  height: 100vh;
   grid-template-areas:
     'left-panel header right-panel'
     'left-panel center right-panel'
@@ -44,4 +44,11 @@ nav {
 }
 .commentslist {
   grid-area: right-panel;
+}
+.articlepage {
+  height: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
 }
