@@ -1,17 +1,14 @@
 import React from 'react';
-import Axios from 'axios';
+import { Link } from '@reach/router';
 import { Comments } from '../Comments';
+import { getArticleById } from '../../Api';
 
 export class ArticlePage extends React.Component {
   state = {
     articleInfo: null,
   };
   componentDidMount() {
-    const url = `https://nc-news-server-2019.herokuapp.com/api/articles/${
-      this.props.articleid
-    }`;
-
-    Axios.get(url).then(({ data: { article } }) => {
+    getArticleById(this.props.articleid).then((article) => {
       this.setState({ articleInfo: article });
     });
   }
@@ -24,13 +21,23 @@ export class ArticlePage extends React.Component {
           <div>
             <h4>{articleInfo.title}</h4>
             <p>Body: {articleInfo.body}</p>
-            <p>Author: {articleInfo.author}</p>
-            <p>Topic: {articleInfo.topic}</p>
+            <p>
+              Author:{' '}
+              <Link to={`/users/${articleInfo.author}`}>
+                {articleInfo.author}
+              </Link>
+            </p>
+            <p>
+              Topic:{' '}
+              <Link to={`/topics/${articleInfo.topic}`}>
+                {articleInfo.topic}
+              </Link>
+            </p>
             <p>Comment Count: {articleInfo.comment_count}</p>
             <p>Votes: {articleInfo.votes}</p>
           </div>
         )}
-        <Comments />
+        <Comments articleid={this.props.articleid} />
       </div>
     );
   }

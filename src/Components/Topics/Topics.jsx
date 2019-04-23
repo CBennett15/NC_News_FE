@@ -1,14 +1,13 @@
 import React from 'react';
-import Axios from 'axios';
 import { TopicList } from './TopicList';
+import { getTopics } from '../../Api';
 
 export class Topics extends React.Component {
   state = {
     topicList: null,
   };
   componentDidMount() {
-    const url = 'https://nc-news-server-2019.herokuapp.com/api/topics';
-    Axios.get(url).then(({ data: { topics } }) => {
+    getTopics().then((topics) => {
       this.setState({ topicList: topics });
     });
   }

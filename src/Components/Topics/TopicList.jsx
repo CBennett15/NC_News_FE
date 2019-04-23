@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, Router } from '@reach/router';
-import { TopicPage } from './TopicPage';
+import { Link } from '@reach/router';
 
-export const TopicList = ({ topics, articles }) => {
+export const TopicList = ({ topics }) => {
   return (
     <div>
       <h2>Topic list...</h2>
@@ -13,9 +12,6 @@ export const TopicList = ({ topics, articles }) => {
           </p>
         );
       })}
-      <Router>
-        <TopicPage articles={articles} topics={topics} path=":slug" />
-      </Router>
     </div>
   );
 };
