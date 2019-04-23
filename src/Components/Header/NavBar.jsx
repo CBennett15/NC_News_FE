@@ -13,12 +13,6 @@ export const NavBar = () => {
       <Link className="link" to="/topics">
         Topics
       </Link>
-      <Link className="link" to="/login">
-        Login
-      </Link>
-      <Link className="link" to="/register">
-        Sign Up
-      </Link>
     </nav>
   );
 };

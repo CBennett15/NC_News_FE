@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from '@reach/router';
 import { getLatestArticles } from '../Api';
+import { ArticleList } from './Articles/ArticleList';
 // import { Articles } from './Articles/Articles';
 
 export class Home extends React.Component {
@@ -18,22 +18,7 @@ export class Home extends React.Component {
       <div>
         <h2>Home Page...</h2>
         <h3>Latest Articles</h3>
-        {latestArticles && (
-          <div>
-            {latestArticles.map((article) => {
-              return (
-                <p key={article.article_id}>
-                  <Link
-                    className="article-link"
-                    to={`articles/${article.article_id}`}
-                  >
-                    {article.title}
-                  </Link>
-                </p>
-              );
-            })}
-          </div>
-        )}
+        {latestArticles && <ArticleList articles={this.state.latestArticles} />}
       </div>
     );
   }

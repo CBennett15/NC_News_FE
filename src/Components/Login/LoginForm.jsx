@@ -1,10 +1,10 @@
 import React from 'react';
 
-export class LoginForm extends React.Component {
-  state = {
-    userInput: '',
-  };
-  render() {
-    return;
-  }
-}
+export const LoginForm = ({ onChange, onSubmit }) => {
+  return (
+    <form className="login" onSubmit={onSubmit}>
+      <input type="text" onChange={onChange} />
+      <button>Login</button>
+    </form>
+  );
+};

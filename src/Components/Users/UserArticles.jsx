@@ -1,5 +1,6 @@
 import React from 'react';
 import { getArticlesByUser } from '../../Api';
+import { ArticleList } from '../Articles/ArticleList';
 
 export class UserArticles extends React.Component {
   state = {
@@ -11,6 +12,17 @@ export class UserArticles extends React.Component {
     });
   }
   render() {
-    return <h3>Users...</h3>;
+    const { userArticles } = this.state;
+    console.log(userArticles);
+    return (
+      <div>
+        {userArticles && (
+          <div>
+            <h3>All Articles by {this.props.username}</h3>
+            <ArticleList articles={userArticles} />
+          </div>
+        )}
+      </div>
+    );
   }
 }

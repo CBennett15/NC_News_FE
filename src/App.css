@@ -52,3 +52,6 @@ nav {
   margin: 0;
   overflow-y: scroll;
 }
+.login {
+  text-align: right;
+}
