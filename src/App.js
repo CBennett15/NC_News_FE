@@ -13,7 +13,7 @@ import { LoginScreen } from './Components/Login/LoginScreen';
 import { LoginNavBar } from './Components/Header/LoginNavBar';
 import { RegisterScreen } from './Components/Register/RegisterScreen';
 import { Greeting } from './Components/Login/Greeting';
-// import { MyAccount } from './Components/MyAccount/MyAccount';
+import { MyAccountPage } from './Components/MyAccount/MyAccountPage';
 
 class App extends Component {
   state = {
@@ -21,18 +21,16 @@ class App extends Component {
     isUserLoggedIn: false,
   };
   render() {
+    const { username, isUserLoggedIn } = this.state;
     return (
       <div className="App">
         <LoginScreen
           logInUser={this.logInUser}
-          loggedin={this.state.isUserLoggedIn}
+          loggedin={isUserLoggedIn}
           logOutUser={this.logOutUser}
         />
-        <Greeting
-          user={this.state.username}
-          loggedin={this.state.isUserLoggedIn}
-        />
-        <LoginNavBar loggedin={this.state.isUserLoggedIn} />
+        <Greeting user={username} loggedin={isUserLoggedIn} />
+        <LoginNavBar loggedin={isUserLoggedIn} />
         <Header />
         <Router>
           <Home path="/" />
@@ -42,7 +40,9 @@ class App extends Component {
           <TopicPage path="/topics/:slug" />
           <UserArticles path="/users/:username" />
           <RegisterScreen logInUser={this.logInUser} path="/register" />
-          {/* <MyAccount path="/myaccount" />} */}
+          {isUserLoggedIn && (
+            <MyAccountPage user={username} path="/myaccount" />
+          )}
         </Router>
       </div>
     );

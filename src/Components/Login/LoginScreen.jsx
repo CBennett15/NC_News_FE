@@ -22,13 +22,9 @@ export class LoginScreen extends React.Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    getUsersByUsername(this.state.userInput)
-      .then((user) => {
-        this.props.logInUser(user.username);
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+    getUsersByUsername(this.state.userInput).then((user) => {
+      this.props.logInUser(user.username);
+    });
   };
   handleLogout = (event) => {
     this.props.logOutUser();
