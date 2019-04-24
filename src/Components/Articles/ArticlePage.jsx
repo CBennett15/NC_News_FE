@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import { Comments } from '../Comments';
+import { Comments } from '../Comments/Comments';
 import { getArticleById } from '../../Api';
 
 export class ArticlePage extends React.Component {

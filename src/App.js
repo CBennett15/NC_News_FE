@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import { Header } from './Components/Header/Header';
-import { Router } from '@reach/router';
+import { Router, navigate } from '@reach/router';
 import { Home } from './Components/Home';
 import { Articles } from './Components/Articles/Articles';
 import { Topics } from './Components/Topics/Topics';
@@ -26,6 +26,7 @@ class App extends Component {
         <LoginScreen
           logInUser={this.logInUser}
           loggedin={this.state.isUserLoggedIn}
+          logOutUser={this.logOutUser}
         />
         <Greeting
           user={this.state.username}
@@ -47,11 +48,13 @@ class App extends Component {
     );
   }
   logInUser = (username) => {
-    if (username) {
-      this.setState({ username: username, isUserLoggedIn: true });
-    } else {
-      this.setState({ username: '', isUserLoggedIn: false });
-    }
+    this.setState({ username: username, isUserLoggedIn: true });
+  };
+  logOutUser = () => {
+    this.setState({ username: '', isUserLoggedIn: false });
+    navigate('/', {
+      state: { directedFromSignUp: true },
+    });
   };
 }
 

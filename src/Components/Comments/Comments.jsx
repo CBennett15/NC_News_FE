@@ -1,5 +1,6 @@
 import React from 'react';
-import { getCommentsByArticle } from '../Api';
+import { getCommentsByArticle } from '../../Api';
+import { CommentCard } from './CommentCard';
 
 export class Comments extends React.Component {
   state = {
@@ -15,15 +16,8 @@ export class Comments extends React.Component {
       <div>
         <h3 className="commentslist">Comments...</h3>
         {this.state.commentsList &&
-          this.state.commentsList.map((comment) => {
-            return (
-              <div key={comment.comment_id}>
-                <p>{comment.author}</p>
-                <p>{comment.body}</p>
-                <p>{comment.created_at}</p>
-                <p>{comment.votes}</p>
-              </div>
-            );
+          this.state.commentsList.map(() => {
+            return <CommentCard comment={this.state.commentsList} />;
           })}
       </div>
     );

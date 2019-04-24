@@ -1,7 +1,6 @@
 import React from 'react';
 import { LoginForm } from './LoginForm';
 import { getUsersByUsername } from '../../Api';
-// import { navigate } from '@reach/router';
 
 export class LoginScreen extends React.Component {
   state = {
@@ -13,6 +12,7 @@ export class LoginScreen extends React.Component {
         loggedin={this.props.loggedin}
         onSubmit={this.handleSubmit}
         onChange={this.handleTyping}
+        onClick={this.handleLogout}
       />
     );
   }
@@ -22,11 +22,15 @@ export class LoginScreen extends React.Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    getUsersByUsername(this.state.userInput).then((user) => {
-      this.props.logInUser(user.username);
-      //   navigate('/myaccount', {
-      //     state: { directedFromLogin: true },
-      //   });
-    });
+    getUsersByUsername(this.state.userInput)
+      .then((user) => {
+        this.props.logInUser(user.username);
+      })
+      .catch((err) => {
+        console.dir(err);
+      });
+  };
+  handleLogout = (event) => {
+    this.props.logOutUser();
   };
 }
