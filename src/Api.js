@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const url = 'https://nc-news-server-2019.herokuapp.com/api/';
+const url = 'https://nc-news-server-2019.herokuapp.com/api';
 
 export const getArticles = () => {
   return Axios.get(`${url}/articles`).then(({ data: { articles } }) => {
@@ -49,6 +49,16 @@ export const getArticlesByUser = (username) => {
 };
 export const getUsersByUsername = (username) => {
   return Axios.get(`${url}/users/${username}`).then(({ data: { user } }) => {
+    return user;
+  });
+};
+
+export const addNewUser = (username, name, avatar_url) => {
+  return Axios.post(`${url}/users`, {
+    username: username,
+    name: name,
+    avatar_url: avatar_url,
+  }).then(({ data: { user } }) => {
     return user;
   });
 };

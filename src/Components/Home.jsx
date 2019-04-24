@@ -1,7 +1,6 @@
 import React from 'react';
 import { getLatestArticles } from '../Api';
 import { ArticleList } from './Articles/ArticleList';
-// import { Articles } from './Articles/Articles';
 
 export class Home extends React.Component {
   state = {

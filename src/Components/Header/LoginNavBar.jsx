@@ -3,12 +3,14 @@ import { Link } from '@reach/router';
 
 export const LoginNavBar = ({ loggedin }) => {
   return (
-    <nav>
-      <Link className="link" to="/register">
-        Sign Up
-      </Link>
+    <nav className="loginnavbar">
+      {!loggedin && (
+        <Link className="loginlink" to="/register">
+          Sign Up
+        </Link>
+      )}
       {loggedin && (
-        <Link className="link" to="/myaccount">
+        <Link className="loginlink" to="/myaccount">
           My Account
         </Link>
       )}

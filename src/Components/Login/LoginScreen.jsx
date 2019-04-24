@@ -9,7 +9,11 @@ export class LoginScreen extends React.Component {
   };
   render() {
     return (
-      <LoginForm onSubmit={this.handleSubmit} onChange={this.handleTyping} />
+      <LoginForm
+        loggedin={this.props.loggedin}
+        onSubmit={this.handleSubmit}
+        onChange={this.handleTyping}
+      />
     );
   }
   handleTyping = (event) => {
