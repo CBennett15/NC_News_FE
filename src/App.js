@@ -14,6 +14,7 @@ import { LoginNavBar } from './Components/Header/LoginNavBar';
 import { RegisterScreen } from './Components/Register/RegisterScreen';
 import { Greeting } from './Components/Login/Greeting';
 import { MyAccountPage } from './Components/MyAccount/MyAccountPage';
+import { Comments } from './Components/Comments/Comments';
 
 class App extends Component {
   state = {
@@ -43,6 +44,7 @@ class App extends Component {
           {isUserLoggedIn && (
             <MyAccountPage user={username} path="/myaccount" />
           )}
+          <Comments loggedin={isUserLoggedIn} path="/comments/:comment_id" />
         </Router>
       </div>
     );
