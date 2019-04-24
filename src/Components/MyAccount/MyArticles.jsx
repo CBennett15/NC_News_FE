@@ -5,7 +5,7 @@ export const MyArticles = ({ user }) => {
   return (
     <button>
       <Link className="loginlink" to={`/users/${user}`}>
-        My Account
+        My Articles
       </Link>
     </button>
   );

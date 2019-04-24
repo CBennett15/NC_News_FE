@@ -35,7 +35,7 @@ class App extends Component {
         <Router>
           <Home path="/" />
           <Articles path="/articles" />
-          <ArticlePage path="/articles/:articleid" />
+          <ArticlePage loggedin={isUserLoggedIn} path="/articles/:articleid" />
           <Topics path="/topics/" />
           <TopicPage path="/topics/:slug" />
           <UserArticles path="/users/:username" />

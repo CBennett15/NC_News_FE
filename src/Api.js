@@ -59,6 +59,21 @@ export const addNewUser = (username, name, avatar_url) => {
     name: name,
     avatar_url: avatar_url,
   }).then(({ data: { user } }) => {
-    return user;
+    return user.username;
+  });
+};
+
+export const addVoteToArticles = (article_id, amount) => {
+  return Axios.patch(`${url}/articles/${article_id}`, {
+    inc_votes: amount,
+  }).then(({ data: { article } }) => {
+    return article;
+  });
+};
+export const addVoteToComments = (comment_id, amount) => {
+  return Axios.patch(`${url}/comments/${comment_id}`, {
+    inc_votes: amount,
+  }).then(({ data: { comment } }) => {
+    return comment;
   });
 };

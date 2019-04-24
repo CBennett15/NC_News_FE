@@ -1,11 +1,17 @@
 import React from 'react';
-import { Link } from '@reach/router';
 import { Comments } from '../Comments/Comments';
-import { getArticleById } from '../../Api';
+import { getArticleById, addVoteToArticles } from '../../Api';
+import { ArticleCardTitle } from './ArticleCardTitle';
+import { ArticleCardInfo } from './ArticleCardInfo';
+import { LikeButton } from '../Buttons/LikeButton';
+import { DislikeButton } from '../Buttons/DislikeButton';
 
 export class ArticlePage extends React.Component {
   state = {
     articleInfo: null,
+    voteChange: 0,
+    voteLoading: null,
+    voteError: null,
   };
   componentDidMount() {
     getArticleById(this.props.articleid).then((article) => {
@@ -18,27 +24,32 @@ export class ArticlePage extends React.Component {
       <div className="articlepage">
         <h3>Article info...</h3>
         {articleInfo && (
-          <div>
-            <h4>{articleInfo.title}</h4>
-            <p>Body: {articleInfo.body}</p>
-            <p>
-              Author:{' '}
-              <Link to={`/users/${articleInfo.author}`}>
-                {articleInfo.author}
-              </Link>
-            </p>
-            <p>
-              Topic:{' '}
-              <Link to={`/topics/${articleInfo.topic}`}>
-                {articleInfo.topic}
-              </Link>
-            </p>
-            <p>Comment Count: {articleInfo.comment_count}</p>
-            <p>Votes: {articleInfo.votes}</p>
-          </div>
+          <ArticleCardTitle
+            voteChange={this.state.voteChange}
+            articleInfo={articleInfo}
+          />
         )}
-        <Comments articleid={this.props.articleid} />
+        {this.props.loggedin && (
+          <>
+            <LikeButton onClick={() => this.handleVoteChange(1)} />
+            <DislikeButton onClick={() => this.handleVoteChange(-1)} />
+          </>
+        )}
+        {articleInfo && (
+          <>
+            <ArticleCardInfo articleInfo={articleInfo} />
+            <Comments articleid={this.props.articleid} />
+          </>
+        )}
       </div>
     );
   }
+  handleVoteChange = (amount) => {
+    addVoteToArticles(this.props.articleid, amount).catch((err) => {
+      console.log(err);
+    });
+    this.setState((prevState) => {
+      return { voteChange: prevState.voteChange + amount };
+    });
+  };
 }
