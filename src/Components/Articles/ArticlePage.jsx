@@ -38,7 +38,10 @@ export class ArticlePage extends React.Component {
         {articleInfo && (
           <>
             <ArticleCardInfo articleInfo={articleInfo} />
-            <Comments articleid={this.props.articleid} />
+            <Comments
+              loggedin={this.props.loggedin}
+              articleid={this.props.articleid}
+            />
           </>
         )}
       </div>

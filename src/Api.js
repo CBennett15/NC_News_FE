@@ -53,13 +53,13 @@ export const getUsersByUsername = (username) => {
   });
 };
 
-export const addNewUser = (username, name, avatar_url) => {
+export const addNewUser = ({ username, name, avatar_url }) => {
   return Axios.post(`${url}/users`, {
     username: username,
     name: name,
     avatar_url: avatar_url,
   }).then(({ data: { user } }) => {
-    return user.username;
+    return user;
   });
 };
 

@@ -13,7 +13,6 @@ export class UserArticles extends React.Component {
   }
   render() {
     const { userArticles } = this.state;
-    console.log(userArticles);
     return (
       <div>
         {userArticles && (

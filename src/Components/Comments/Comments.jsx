@@ -1,13 +1,10 @@
 import React from 'react';
-import { getCommentsByArticle, addVoteToComments } from '../../Api';
+import { getCommentsByArticle } from '../../Api';
 import { CommentCard } from './CommentCard';
-import { LikeButton } from '../Buttons/LikeButton';
-import { DislikeButton } from '../Buttons/DislikeButton';
 
 export class Comments extends React.Component {
   state = {
     commentsList: null,
-    voteChange: 0,
   };
   componentDidMount() {
     getCommentsByArticle(this.props.articleid).then((comments) => {
@@ -21,31 +18,16 @@ export class Comments extends React.Component {
         {this.state.commentsList &&
           this.state.commentsList.map((comment) => {
             return (
-              <>
+              <div key={comment.comment_id}>
                 <CommentCard
-                  handleVoteChange={this.handleVoteChange}
                   key={comment.comment_id}
                   comment={comment}
-                  voteChange={this.state.voteChange}
+                  loggedin={this.props.loggedin}
                 />
-                {this.props.loggedin && (
-                  <>
-                    <LikeButton onClick={() => this.handleVoteChange(1)} />
-                    <DislikeButton onClick={() => this.handleVoteChange(-1)} />
-                  </>
-                )}
-              </>
+              </div>
             );
           })}
       </div>
     );
   }
-  handleVoteChange = (amount) => {
-    addVoteToComments(this.props.comment_id, amount).catch((err) => {
-      console.log(err);
-    });
-    this.setState((prevState) => {
-      return { voteChange: prevState.voteChange + amount };
-    });
-  };
 }

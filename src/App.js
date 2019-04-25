@@ -21,6 +21,12 @@ class App extends Component {
     username: '',
     isUserLoggedIn: false,
   };
+
+  componentDidMount() {
+    const recentUser = localStorage.getItem('recentLoggedInUser');
+    if (recentUser)
+      this.setState({ username: recentUser, isUserLoggedIn: true });
+  }
   render() {
     const { username, isUserLoggedIn } = this.state;
     return (
@@ -51,9 +57,11 @@ class App extends Component {
   }
   logInUser = (username) => {
     this.setState({ username: username, isUserLoggedIn: true });
+    localStorage.setItem('recentLoggedInUser', username);
   };
   logOutUser = () => {
     this.setState({ username: '', isUserLoggedIn: false });
+    localStorage.removeItem('recentLoggedInUser');
     navigate('/', {
       state: { directedFromSignUp: true },
     });
