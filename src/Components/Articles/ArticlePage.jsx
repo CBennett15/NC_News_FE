@@ -41,6 +41,7 @@ export class ArticlePage extends React.Component {
             <Comments
               loggedin={this.props.loggedin}
               articleid={this.props.articleid}
+              username={this.props.user}
             />
           </>
         )}

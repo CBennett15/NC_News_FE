@@ -15,6 +15,7 @@ import { RegisterScreen } from './Components/Register/RegisterScreen';
 import { Greeting } from './Components/Login/Greeting';
 import { MyAccountPage } from './Components/MyAccount/MyAccountPage';
 import { Comments } from './Components/Comments/Comments';
+import { NotFound } from './Components/Errors/NotFound';
 
 class App extends Component {
   state = {
@@ -42,15 +43,20 @@ class App extends Component {
         <Router>
           <Home path="/" />
           <Articles path="/articles" />
-          <ArticlePage loggedin={isUserLoggedIn} path="/articles/:articleid" />
+          <ArticlePage
+            user={username}
+            loggedin={isUserLoggedIn}
+            path="/articles/:articleid"
+          />
           <Topics path="/topics/" />
           <TopicPage path="/topics/:slug" />
-          <UserArticles path="/users/:username" />
+          <UserArticles loggedin={isUserLoggedIn} path="/users/:username" />
           <RegisterScreen logInUser={this.logInUser} path="/register" />
           {isUserLoggedIn && (
             <MyAccountPage user={username} path="/myaccount" />
           )}
           <Comments loggedin={isUserLoggedIn} path="/comments/:comment_id" />
+          <NotFound default />
         </Router>
       </div>
     );

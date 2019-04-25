@@ -77,3 +77,16 @@ export const addVoteToComments = (comment_id, amount) => {
     return comment;
   });
 };
+
+export const addNewComment = (article_id, { username, body }) => {
+  return Axios.post(`${url}/articles/${article_id}/comments`, {
+    username: username,
+    body: body,
+  })
+    .then(({ data: { comment } }) => {
+      return comment;
+    })
+    .catch((err) => {
+      console.dir(err);
+    });
+};
