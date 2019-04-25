@@ -16,6 +16,7 @@ import { Greeting } from './Components/Login/Greeting';
 import { MyAccountPage } from './Components/MyAccount/MyAccountPage';
 import { Comments } from './Components/Comments/Comments';
 import { NotFound } from './Components/Errors/NotFound';
+import { UserComments } from './Components/Users/UserComments';
 
 class App extends Component {
   state = {
@@ -50,7 +51,11 @@ class App extends Component {
           />
           <Topics path="/topics/" />
           <TopicPage path="/topics/:slug" />
-          <UserArticles loggedin={isUserLoggedIn} path="/users/:username" />
+          <UserArticles loggedin={isUserLoggedIn} path="/users/:username/" />
+          <UserComments
+            loggedin={isUserLoggedIn}
+            path="/users/:username/comments"
+          />
           <RegisterScreen logInUser={this.logInUser} path="/register" />
           {isUserLoggedIn && (
             <MyAccountPage user={username} path="/myaccount" />

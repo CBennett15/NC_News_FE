@@ -47,6 +47,13 @@ export const getArticlesByUser = (username) => {
     },
   );
 };
+export const getCommentsByUser = (username) => {
+  return Axios.get(`${url}/comments?author=${username}`).then(
+    ({ data: { comments } }) => {
+      return comments;
+    },
+  );
+};
 export const getUsersByUsername = (username) => {
   return Axios.get(`${url}/users/${username}`).then(({ data: { user } }) => {
     return user;

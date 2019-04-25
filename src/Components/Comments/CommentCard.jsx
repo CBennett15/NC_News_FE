@@ -16,7 +16,7 @@ export class CommentCard extends React.Component {
       <div key={comment.comment_id}>
         <p>Comment: {comment.body}</p>
         <p>Author: {comment.author}</p>
-        <p>{comment.created_at}</p>
+        <p>{comment.created_at.slice(0, 10)}</p>
         <p>Votes: {comment.votes + voteChange}</p>
         {loggedin && (
           <>

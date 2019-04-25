@@ -44,6 +44,7 @@ nav {
 }
 .commentslist {
   grid-area: right-panel;
+  background-color: beige;
 }
 .articlepage {
   height: 100%;
@@ -85,6 +86,8 @@ nav {
 .articlebody {
   height: 60px;
   line-height: 20px;
+  background-color: beige;
+  border: 1px solid black;
   overflow: hidden;
 }
 .greeting {

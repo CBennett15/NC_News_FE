@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCommentsByArticle, addNewComment } from '../../Api';
+import { getCommentsByArticle } from '../../Api';
 import { CommentCard } from './CommentCard';
 import { AddComment } from './AddComment';
 
@@ -7,24 +7,35 @@ export class Comments extends React.Component {
   state = {
     commentsList: null,
     newComment: null,
+    hasSubmitted: false,
   };
   componentDidMount() {
-    getCommentsByArticle(this.props.articleid).then((comments) => {
-      this.setState({ commentsList: comments });
-    });
+    this.getComments();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.hasSubmitted &&
+      this.state.newComment !== prevState.newComment
+    ) {
+      console.log('something');
+      this.getComments();
+    }
   }
   render() {
+    const { username, loggedin, articleid } = this.props;
+    const { commentsList } = this.state;
     return (
       <div>
         <h3 className="commentslist">Comments...</h3>
-        {this.props.loggedin && (
+        {loggedin && (
           <AddComment
-            handleTyping={this.handleTyping}
-            handleSubmit={this.handleSubmit}
+            username={username}
+            articleid={articleid}
+            submitComment={this.submitComment}
           />
         )}
-        {this.state.commentsList &&
-          this.state.commentsList.map((comment) => {
+        {commentsList &&
+          commentsList.map((comment) => {
             return (
               <div key={comment.comment_id}>
                 <CommentCard
@@ -38,23 +49,12 @@ export class Comments extends React.Component {
       </div>
     );
   }
-  handleTyping = (event) => {
-    const value = event.target.value;
-    this.setState({ newComment: value });
+  getComments = () => {
+    getCommentsByArticle(this.props.articleid).then((comments) => {
+      this.setState({ commentsList: comments });
+    });
   };
-  handleSubmit = (event) => {
-    const { articleid, username } = this.props;
-    const { newComment } = this.state;
-    event.preventDefault();
-    addNewComment(articleid, {
-      username: username,
-      body: newComment,
-    })
-      .then((comment) => {
-        console.log(comment);
-      })
-      .catch((err) => {
-        console.dir(err);
-      });
+  submitComment = (comment) => {
+    this.setState({ newComment: comment, hasSubmitted: true });
   };
 }
