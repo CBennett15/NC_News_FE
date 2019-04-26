@@ -17,7 +17,6 @@ export class Comments extends React.Component {
       this.state.hasSubmitted &&
       this.state.newComment !== prevState.newComment
     ) {
-      console.log('something');
       this.getComments();
     }
   }

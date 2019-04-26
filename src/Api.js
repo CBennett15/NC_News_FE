@@ -101,8 +101,7 @@ export const addNewComment = (article_id, { username, body }) => {
 };
 
 export const deleteComment = (comment_id) => {
-  return Axios.delete(`${url}/comments/${comment_id}`).then((res) => {
-    console.log(res);
-    this.setState({ studentInfo: res.data });
+  return Axios.delete(`${url}/comments/${comment_id}`).then(({ data }) => {
+    return data;
   });
 };
