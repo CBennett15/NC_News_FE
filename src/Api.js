@@ -2,6 +2,8 @@ import Axios from 'axios';
 
 const url = 'https://nc-news-server-2019.herokuapp.com/api';
 
+//I know I need to refactor these to make use of queries rather than individual functions - work in progress
+
 export const getArticles = () => {
   return Axios.get(`${url}/articles`).then(({ data: { articles } }) => {
     return articles;
@@ -96,4 +98,11 @@ export const addNewComment = (article_id, { username, body }) => {
     .catch((err) => {
       console.dir(err);
     });
+};
+
+export const deleteComment = (comment_id) => {
+  return Axios.delete(`${url}/comments/${comment_id}`).then((res) => {
+    console.log(res);
+    this.setState({ studentInfo: res.data });
+  });
 };
