@@ -11,3 +11,5 @@ export class DeleteComment extends React.Component {
     });
   };
 }
+
+//have got it working but just not refreshing page

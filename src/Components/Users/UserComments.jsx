@@ -14,10 +14,7 @@ export class UserComments extends React.Component {
     this.getAllCommentsByUser(this.props.username);
   }
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.hasDeleted &&
-      this.state.userComments.length !== prevState.userComments.length
-    ) {
+    if (this.state.hasDeleted) {
       this.getAllCommentsByUser(this.props.username);
     }
   }
@@ -74,5 +71,6 @@ export class UserComments extends React.Component {
   };
   hasDeletedComment = () => {
     this.setState({ hasDeleted: true });
+    alert('this comment has been deleted');
   };
 }
