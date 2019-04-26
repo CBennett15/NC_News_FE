@@ -5,12 +5,14 @@ import { addNewComment } from '../../Api';
 export class AddComment extends React.Component {
   state = {
     commentInput: '',
+    error: null,
   };
   render() {
     return (
       <AddCommentForm
         handleTyping={this.handleTyping}
         handleSubmit={this.handleSubmit}
+        error={this.state.error}
       />
     );
   }
@@ -25,8 +27,13 @@ export class AddComment extends React.Component {
     addNewComment(articleid, {
       username: username,
       body: commentInput,
-    }).then((comment) => {
-      this.props.submitComment(comment);
-    });
+    })
+      .then((comment) => {
+        this.props.submitComment(comment);
+        this.setState({ error: null });
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
   };
 }

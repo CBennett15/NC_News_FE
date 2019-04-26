@@ -4,7 +4,8 @@ import { getUsersByUsername } from '../../Api';
 
 export class LoginScreen extends React.Component {
   state = {
-    userInput: '',
+    userInput: '' || 'DefaultUser',
+    error: null,
   };
   render() {
     return (
@@ -13,6 +14,8 @@ export class LoginScreen extends React.Component {
         onSubmit={this.handleSubmit}
         onChange={this.handleTyping}
         onClick={this.handleLogout}
+        userInput={this.state.userInput}
+        error={this.state.error}
       />
     );
   }
@@ -22,9 +25,13 @@ export class LoginScreen extends React.Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    getUsersByUsername(this.state.userInput).then((user) => {
-      this.props.logInUser(user.username);
-    });
+    getUsersByUsername(this.state.userInput)
+      .then((user) => {
+        this.props.logInUser(user.username);
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
   };
   handleLogout = (event) => {
     this.props.logOutUser();

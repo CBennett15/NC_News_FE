@@ -9,7 +9,20 @@ export const getArticles = () => {
     return articles;
   });
 };
-
+export const getArticlesSortedByComment = () => {
+  return Axios.get(`${url}/articles?sort_by=comment_count`).then(
+    ({ data: { articles } }) => {
+      return articles;
+    },
+  );
+};
+export const getArticlesSortedByVotes = () => {
+  return Axios.get(`${url}/articles?sort_by=votes`).then(
+    ({ data: { articles } }) => {
+      return articles;
+    },
+  );
+};
 export const getLatestArticles = () => {
   return Axios.get(`${url}/articles?limit=5`).then(({ data: { articles } }) => {
     return articles;
@@ -91,13 +104,9 @@ export const addNewComment = (article_id, { username, body }) => {
   return Axios.post(`${url}/articles/${article_id}/comments`, {
     username: username,
     body: body,
-  })
-    .then(({ data: { comment } }) => {
-      return comment;
-    })
-    .catch((err) => {
-      console.dir(err);
-    });
+  }).then(({ data: { comment } }) => {
+    return comment;
+  });
 };
 
 export const deleteComment = (comment_id) => {

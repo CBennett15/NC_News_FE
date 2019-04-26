@@ -104,8 +104,7 @@ input[type='text'] {
   /* grid-area: center; */
   height: 60px;
   line-height: 20px;
-  background-color: beige;
-  border: 1px solid black;
+
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -127,5 +126,12 @@ textarea {
   resize: vertical;
 }
 button {
+  border: 1px solid black;
+}
+.error {
+  font-size: 15px;
+  color: red;
+}
+.article {
   border: 1px solid black;
 }
