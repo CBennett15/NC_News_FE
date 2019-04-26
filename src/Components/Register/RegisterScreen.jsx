@@ -8,10 +8,15 @@ export class RegisterScreen extends React.Component {
     username: '',
     name: '',
     avatar_url: '',
+    error: null,
   };
   render() {
     return (
-      <RegisterForm onSubmit={this.handleSubmit} onChange={this.handleTyping} />
+      <RegisterForm
+        error={this.state.error}
+        onSubmit={this.handleSubmit}
+        onChange={this.handleTyping}
+      />
     );
   }
   handleTyping = (event) => {
@@ -30,9 +35,10 @@ export class RegisterScreen extends React.Component {
         navigate('/', {
           state: { directedFromSignUp: true },
         });
+        this.setState({ error: null });
       })
       .catch((err) => {
-        console.log(err);
+        this.setState({ error: err });
       });
   };
 }
