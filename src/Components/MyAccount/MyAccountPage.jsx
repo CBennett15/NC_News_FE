@@ -2,6 +2,7 @@ import React from 'react';
 import { getUsersByUsername } from '../../Api';
 import { MyArticles } from './MyArticles';
 import { MyComments } from './MyComments';
+import { navigate } from '@reach/router';
 
 export class MyAccountPage extends React.Component {
   state = {
@@ -20,8 +21,10 @@ export class MyAccountPage extends React.Component {
           <li>{this.state.userInfo.name}</li>
           <img src={this.state.userInfo.avatar_url} alt="user-avatar" />
         </ul>
-        <MyArticles user={this.props.user} />
-        <MyComments user={this.props.user} />
+        <MyArticles onClick={() => navigate(`/users/${this.props.user}`)} />
+        <MyComments
+          onClick={() => navigate(`/users/${this.props.user}/comments`)}
+        />
       </div>
     );
   }

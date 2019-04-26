@@ -1,12 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router';
 
-export const MyComments = ({ user }) => {
-  return (
-    <button>
-      <Link className="loginlink" to={`/users/${user}/comments`}>
-        My Comments
-      </Link>
-    </button>
-  );
+export const MyComments = ({ onClick }) => {
+  return <button onClick={onClick}>My Comments</button>;
 };
