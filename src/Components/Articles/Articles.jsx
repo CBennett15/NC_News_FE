@@ -1,67 +1,54 @@
 import React from 'react';
-import {
-  getArticles,
-  getArticlesSortedByComment,
-  getArticlesSortedByVotes,
-} from '../../Api';
+import { getArticles } from '../../Api';
 import { ArticleList } from './ArticleList';
+import { NotFound } from '../Errors/NotFound';
+import { ReusableButton } from '../Buttons/ReusableButton';
 
 export class Articles extends React.Component {
   state = {
     articlesList: null,
-    isSorted: false,
-    created_at: null,
-    comment_count: null,
-    votes: null,
+    error: null,
   };
   componentDidMount() {
-    this.fetchArticles();
+    this.fetchArticles({});
   }
 
   render() {
-    const { articlesList } = this.state;
+    const { articlesList, error } = this.state;
 
     return (
       <div>
         <h2>Articles...</h2>
-        <button
-          name="created_at"
+        <ReusableButton
           value="created_at"
-          onClick={this.handleCreatedAtClick}
-        >
-          Sort By Date Created
-        </button>
-        <button
-          name="comment_count"
+          onClick={this.handleClick}
+          text="Sort By Date Created"
+        />
+        <ReusableButton
           value="comment_count"
-          onClick={this.handleCommentCountClick}
-        >
-          Sort By Comment Count
-        </button>
-        <button name="votes" value="votes" onClick={this.handleVotesClick}>
-          Sort By Votes
-        </button>
+          onClick={this.handleClick}
+          text="Sort By Comment Count"
+        />
+        <ReusableButton
+          value="votes"
+          onClick={this.handleClick}
+          text="Sort By Votes"
+        />
         {articlesList && <ArticleList articles={articlesList} />}
+        {error && <NotFound msg={error.response.data.msg} />}
       </div>
     );
   }
-  fetchArticles = () => {
-    getArticles().then((articles) => {
-      this.setState({ articlesList: articles });
-    });
+  fetchArticles = (params) => {
+    return getArticles(params)
+      .then((articles) => {
+        this.setState({ articlesList: articles });
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
   };
-  handleCreatedAtClick = (event) => {
-    this.fetchArticles();
-  };
-  handleCommentCountClick = (event) => {
-    getArticlesSortedByComment().then((articles) => {
-      this.setState({ articlesList: articles, isSorted: false });
-    });
-  };
-
-  handleVotesClick = (event) => {
-    getArticlesSortedByVotes().then((articles) => {
-      this.setState({ articlesList: articles, isSorted: false });
-    });
+  handleClick = (event) => {
+    this.fetchArticles({ sort_by: event.target.value });
   };
 }

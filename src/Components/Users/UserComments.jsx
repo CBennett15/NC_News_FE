@@ -4,11 +4,13 @@ import { CommentCard } from '../Comments/CommentCard';
 import { navigate, Link } from '@reach/router';
 import { DeleteComment } from '../Buttons/DeleteComment';
 import { ReusableButton } from '../Buttons/ReusableButton';
+import { NotFound } from '../Errors/NotFound';
 
 export class UserComments extends React.Component {
   state = {
     userComments: null,
     hasDeleted: false,
+    error: null,
   };
   componentDidMount() {
     const { username } = this.props;
@@ -22,21 +24,20 @@ export class UserComments extends React.Component {
     }
   }
   render() {
-    const { userComments } = this.state;
+    const { userComments, error } = this.state;
     const { loggedin, username } = this.props;
     return (
       <div>
-        {userComments && (
-          <div>
-            <h3>All Comments by {username}</h3>
-            {loggedin && (
-              <ReusableButton
-                onClick={this.handleClick}
-                text={'Return To Account'}
-              />
-            )}
-          </div>
-        )}
+        <div>
+          <h3>All Comments by {username}</h3>
+          {loggedin && (
+            <ReusableButton
+              onClick={this.handleClick}
+              text={'Return To Account'}
+            />
+          )}
+        </div>
+        {error && <NotFound msg={error.response.data.msg} />}
         {userComments &&
           userComments.map((comment) => {
             return (
@@ -74,9 +75,13 @@ export class UserComments extends React.Component {
   };
   getAllCommentsByUser = () => {
     const { username } = this.props;
-    getCommentsByUser(username).then((comments) => {
-      this.setState({ userComments: comments });
-    });
+    getCommentsByUser(username)
+      .then((comments) => {
+        this.setState({ userComments: comments });
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
   };
   hasDeletedComment = () => {
     this.setState({ hasDeleted: true });

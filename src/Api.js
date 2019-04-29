@@ -4,30 +4,14 @@ const url = 'https://nc-news-server-2019.herokuapp.com/api';
 
 //I know I need to refactor these to make use of queries rather than individual functions - work in progress
 
-export const getArticles = () => {
-  return Axios.get(`${url}/articles`).then(({ data: { articles } }) => {
-    return articles;
-  });
-};
-export const getArticlesSortedByComment = () => {
-  return Axios.get(`${url}/articles?sort_by=comment_count`).then(
+export const getArticles = (params) => {
+  return Axios({ method: 'get', url: `${url}/articles`, params }).then(
     ({ data: { articles } }) => {
       return articles;
     },
   );
 };
-export const getArticlesSortedByVotes = () => {
-  return Axios.get(`${url}/articles?sort_by=votes`).then(
-    ({ data: { articles } }) => {
-      return articles;
-    },
-  );
-};
-export const getLatestArticles = () => {
-  return Axios.get(`${url}/articles?limit=5`).then(({ data: { articles } }) => {
-    return articles;
-  });
-};
+
 export const getArticleById = (articleid) => {
   return Axios.get(`${url}/articles/${articleid}`).then(
     ({ data: { article } }) => {
@@ -40,13 +24,6 @@ export const getTopics = () => {
     return topics;
   });
 };
-export const getArticlesByTopic = (slug) => {
-  return Axios.get(`${url}/articles?topic=${slug}`).then(
-    ({ data: { articles } }) => {
-      return articles;
-    },
-  );
-};
 
 export const getCommentsByArticle = (articleid) => {
   return Axios.get(`${url}/articles/${articleid}/comments`).then(
@@ -55,13 +32,7 @@ export const getCommentsByArticle = (articleid) => {
     },
   );
 };
-export const getArticlesByUser = (username) => {
-  return Axios.get(`${url}/articles?author=${username}`).then(
-    ({ data: { articles } }) => {
-      return articles;
-    },
-  );
-};
+
 export const getCommentsByUser = (username) => {
   return Axios.get(`${url}/comments?author=${username}`).then(
     ({ data: { comments } }) => {

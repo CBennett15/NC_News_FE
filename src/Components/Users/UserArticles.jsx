@@ -1,36 +1,39 @@
 import React from 'react';
-import { getArticlesByUser } from '../../Api';
+import { getArticles } from '../../Api';
 import { ArticleList } from '../Articles/ArticleList';
 import { navigate } from '@reach/router';
 import { ReusableButton } from '../Buttons/ReusableButton';
+import { NotFound } from '../Errors/NotFound';
 
 export class UserArticles extends React.Component {
   state = {
     userArticles: null,
+    error: null,
   };
   componentDidMount() {
     const { username } = this.props;
-    getArticlesByUser(username).then((articles) => {
-      this.setState({ userArticles: articles });
-    });
+    getArticles({ author: `${username}` })
+      .then((articles) => {
+        this.setState({ userArticles: articles });
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
   }
   render() {
-    const { userArticles } = this.state;
+    const { userArticles, error } = this.state;
     const { loggedin, username } = this.props;
     return (
       <div>
-        {userArticles && (
-          <div>
-            <h3>All Articles by {username}</h3>
-            {loggedin && (
-              <ReusableButton
-                onClick={this.handleClick}
-                text={'Return To Account'}
-              />
-            )}
-            <ArticleList articles={userArticles} />
-          </div>
+        <h3>All Articles by {username}</h3>
+        {loggedin && (
+          <ReusableButton
+            onClick={this.handleClick}
+            text={'Return To Account'}
+          />
         )}
+        {error && <NotFound msg={error.response.data.msg} />}
+        {userArticles && <ArticleList articles={userArticles} />}
       </div>
     );
   }

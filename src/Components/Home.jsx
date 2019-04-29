@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLatestArticles } from '../Api';
+import { getArticles } from '../Api';
 import { ArticleList } from './Articles/ArticleList';
 
 export class Home extends React.Component {
@@ -7,7 +7,7 @@ export class Home extends React.Component {
     latestArticles: null,
   };
   componentDidMount() {
-    getLatestArticles().then((articles) => {
+    getArticles({ limit: 5 }).then((articles) => {
       this.setState({ latestArticles: articles });
     });
   }

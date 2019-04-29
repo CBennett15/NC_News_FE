@@ -49,9 +49,13 @@ export class Comments extends React.Component {
   }
   getComments = () => {
     const { articleid } = this.props;
-    getCommentsByArticle(articleid).then((comments) => {
-      this.setState({ commentsList: comments });
-    });
+    getCommentsByArticle(articleid)
+      .then((comments) => {
+        this.setState({ commentsList: comments });
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
   };
   submitComment = (comment) => {
     this.setState({ newComment: comment, hasSubmitted: true });

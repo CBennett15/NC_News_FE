@@ -5,6 +5,7 @@ import { ArticleCardTitle } from './ArticleCardTitle';
 import { ArticleCardInfo } from './ArticleCardInfo';
 import { LikeButton } from '../Buttons/LikeButton';
 import { DislikeButton } from '../Buttons/DislikeButton';
+import { NotFound } from '../Errors/NotFound';
 
 export class ArticlePage extends React.Component {
   state = {
@@ -16,16 +17,21 @@ export class ArticlePage extends React.Component {
   };
   componentDidMount() {
     const { articleid } = this.props;
-    getArticleById(articleid).then((article) => {
-      this.setState({ articleInfo: article });
-    });
+    getArticleById(articleid)
+      .then((article) => {
+        this.setState({ articleInfo: article });
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
   }
   render() {
-    const { articleInfo, voteChange } = this.state;
+    const { articleInfo, voteChange, error } = this.state;
     const { loggedin, articleid, user } = this.props;
     return (
       <div className="articlepage">
-        <h3>Article info...</h3>
+        <h3>Article</h3>
+        {error && <NotFound msg={error.response.data.msg} />}
         {articleInfo && (
           <ArticleCardTitle voteChange={voteChange} articleInfo={articleInfo} />
         )}
