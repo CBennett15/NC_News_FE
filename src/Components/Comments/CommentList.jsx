@@ -8,7 +8,7 @@ export const CommentList = ({ comments, loggedin }) => {
         <CommentCard
           key={comment.comment_id}
           comment={comment}
-          loggedin={this.props.loggedin}
+          loggedin={loggedin}
         />
       </div>
     );

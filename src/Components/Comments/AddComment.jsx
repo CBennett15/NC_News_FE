@@ -8,11 +8,12 @@ export class AddComment extends React.Component {
     error: null,
   };
   render() {
+    const { error } = this.state;
     return (
       <AddCommentForm
         handleTyping={this.handleTyping}
         handleSubmit={this.handleSubmit}
-        error={this.state.error}
+        error={error}
       />
     );
   }
@@ -21,7 +22,7 @@ export class AddComment extends React.Component {
     this.setState({ commentInput: value });
   };
   handleSubmit = (event) => {
-    const { articleid, username } = this.props;
+    const { articleid, username, submitComment } = this.props;
     const { commentInput } = this.state;
     event.preventDefault();
     addNewComment(articleid, {
@@ -29,7 +30,7 @@ export class AddComment extends React.Component {
       body: commentInput,
     })
       .then((comment) => {
-        this.props.submitComment(comment);
+        submitComment(comment);
         this.setState({ error: null });
       })
       .catch((err) => {

@@ -1,15 +1,20 @@
 import React from 'react';
 import { deleteComment } from '../../Api';
+import { ReusableButton } from './ReusableButton';
 
 export class DeleteComment extends React.Component {
   render() {
-    return <button onClick={this.handleDeleteButton}>Delete Comment</button>;
+    return (
+      <ReusableButton
+        onClick={this.handleDeleteButton}
+        text={'Delete Comment'}
+      />
+    );
   }
   handleDeleteButton = () => {
-    deleteComment(this.props.comment_id).then(() => {
-      this.props.hasDeletedComment();
+    const { comment_id, hasDeletedComment } = this.props;
+    deleteComment(comment_id).then(() => {
+      hasDeletedComment();
     });
   };
 }
-
-//have got it working but just not refreshing page

@@ -11,9 +11,10 @@ export class RegisterScreen extends React.Component {
     error: null,
   };
   render() {
+    const { error } = this.state;
     return (
       <RegisterForm
-        error={this.state.error}
+        error={error}
         onSubmit={this.handleSubmit}
         onChange={this.handleTyping}
       />
@@ -24,14 +25,16 @@ export class RegisterScreen extends React.Component {
     this.setState({ [event.target.name]: value });
   };
   handleSubmit = (event) => {
+    const { username, name, avatar_url } = this.state;
+    const { logInUser } = this.props;
     event.preventDefault();
     addNewUser({
-      username: this.state.username,
-      name: this.state.name,
-      avatar_url: this.state.avatar_url,
+      username: username,
+      name: name,
+      avatar_url: avatar_url,
     })
       .then((user) => {
-        this.props.logInUser(user.username);
+        logInUser(user.username);
         navigate('/', {
           state: { directedFromSignUp: true },
         });

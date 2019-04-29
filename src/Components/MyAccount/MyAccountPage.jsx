@@ -1,29 +1,35 @@
 import React from 'react';
 import { getUsersByUsername } from '../../Api';
-import { MyArticles } from './MyArticles';
-import { MyComments } from './MyComments';
 import { navigate } from '@reach/router';
+import { ReusableButton } from '../Buttons/ReusableButton';
 
 export class MyAccountPage extends React.Component {
   state = {
     userInfo: '',
   };
   componentDidMount() {
-    getUsersByUsername(this.props.user).then((user) => {
+    const { user } = this.props;
+    getUsersByUsername(user).then((user) => {
       this.setState({ userInfo: user });
     });
   }
   render() {
+    const { user } = this.props;
+    const { userInfo } = this.state;
     return (
       <div>
-        <h2>Welcome Back {this.props.user}</h2>
+        <h2>Welcome Back {user}</h2>
         <ul>
-          <li>{this.state.userInfo.name}</li>
-          <img src={this.state.userInfo.avatar_url} alt="user-avatar" />
+          <li>{userInfo.name}</li>
+          <img src={userInfo.avatar_url} alt="user-avatar" />
         </ul>
-        <MyArticles onClick={() => navigate(`/users/${this.props.user}`)} />
-        <MyComments
-          onClick={() => navigate(`/users/${this.props.user}/comments`)}
+        <ReusableButton
+          onClick={() => navigate(`/users/${user}`)}
+          text={'My Articles'}
+        />
+        <ReusableButton
+          onClick={() => navigate(`/users/${user}/comments`)}
+          text={'My Comments'}
         />
       </div>
     );

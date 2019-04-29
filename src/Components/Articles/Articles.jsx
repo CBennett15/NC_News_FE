@@ -41,7 +41,7 @@ export class Articles extends React.Component {
         <button name="votes" value="votes" onClick={this.handleVotesClick}>
           Sort By Votes
         </button>
-        {articlesList && <ArticleList articles={this.state.articlesList} />}
+        {articlesList && <ArticleList articles={articlesList} />}
       </div>
     );
   }

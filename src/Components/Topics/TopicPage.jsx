@@ -7,16 +7,15 @@ export class TopicPage extends React.Component {
     topicsArticles: null,
   };
   componentDidMount() {
-    getArticlesByTopic(this.props.slug).then((articles) => {
+    const { slug } = this.props;
+    getArticlesByTopic(slug).then((articles) => {
       this.setState({ topicsArticles: articles });
     });
   }
   render() {
     const { topicsArticles } = this.state;
     return (
-      <div>
-        {topicsArticles && <ArticleList articles={this.state.topicsArticles} />}
-      </div>
+      <div>{topicsArticles && <ArticleList articles={topicsArticles} />}</div>
     );
   }
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { getCommentsByUser } from '../../Api';
-import { ReturnToAccount } from '../Buttons/ReturnToAccount';
 import { CommentCard } from '../Comments/CommentCard';
 import { navigate, Link } from '@reach/router';
 import { DeleteComment } from '../Buttons/DeleteComment';
+import { ReusableButton } from '../Buttons/ReusableButton';
 
 export class UserComments extends React.Component {
   state = {
@@ -11,22 +11,30 @@ export class UserComments extends React.Component {
     hasDeleted: false,
   };
   componentDidMount() {
-    this.getAllCommentsByUser(this.props.username);
+    const { username } = this.props;
+    this.getAllCommentsByUser(username);
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.hasDeleted) {
-      this.getAllCommentsByUser(this.props.username);
+    const { hasDeleted } = this.state;
+    const { username } = this.props;
+    if (hasDeleted) {
+      this.getAllCommentsByUser(username);
     }
   }
   render() {
     const { userComments } = this.state;
-    const { loggedin } = this.props;
+    const { loggedin, username } = this.props;
     return (
       <div>
         {userComments && (
           <div>
-            <h3>All Comments by {this.props.username}</h3>
-            {loggedin && <ReturnToAccount onClick={this.handleClick} />}
+            <h3>All Comments by {username}</h3>
+            {loggedin && (
+              <ReusableButton
+                onClick={this.handleClick}
+                text={'Return To Account'}
+              />
+            )}
           </div>
         )}
         {userComments &&
@@ -45,11 +53,11 @@ export class UserComments extends React.Component {
                 <CommentCard
                   key={comment.comment_id}
                   comment={comment}
-                  loggedin={this.props.loggedin}
+                  loggedin={loggedin}
                 />
                 {loggedin && (
                   <DeleteComment
-                    username={this.props.username}
+                    username={username}
                     comment_id={comment.comment_id}
                     hasDeletedComment={this.hasDeletedComment}
                   />
@@ -65,7 +73,8 @@ export class UserComments extends React.Component {
     navigate('/myaccount');
   };
   getAllCommentsByUser = () => {
-    getCommentsByUser(this.props.username).then((comments) => {
+    const { username } = this.props;
+    getCommentsByUser(username).then((comments) => {
       this.setState({ userComments: comments });
     });
   };

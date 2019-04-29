@@ -8,14 +8,16 @@ export class LoginScreen extends React.Component {
     error: null,
   };
   render() {
+    const { userInput, error } = this.state;
+    const { loggedin } = this.props;
     return (
       <LoginForm
-        loggedin={this.props.loggedin}
+        loggedin={loggedin}
         onSubmit={this.handleSubmit}
         onChange={this.handleTyping}
         onClick={this.handleLogout}
-        userInput={this.state.userInput}
-        error={this.state.error}
+        userInput={userInput}
+        error={error}
       />
     );
   }
@@ -24,8 +26,9 @@ export class LoginScreen extends React.Component {
     this.setState({ userInput: value });
   };
   handleSubmit = (event) => {
+    const { userInput } = this.state;
     event.preventDefault();
-    getUsersByUsername(this.state.userInput)
+    getUsersByUsername(userInput)
       .then((user) => {
         this.props.logInUser(user.username);
       })

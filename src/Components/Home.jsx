@@ -17,7 +17,7 @@ export class Home extends React.Component {
       <div>
         <h2>Home Page...</h2>
         <h3>Latest Articles</h3>
-        {latestArticles && <ArticleList articles={this.state.latestArticles} />}
+        {latestArticles && <ArticleList articles={latestArticles} />}
       </div>
     );
   }

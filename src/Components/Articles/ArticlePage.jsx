@@ -12,36 +12,42 @@ export class ArticlePage extends React.Component {
     voteChange: 0,
     voteLoading: null,
     voteError: null,
+    error: null,
   };
   componentDidMount() {
-    getArticleById(this.props.articleid).then((article) => {
+    const { articleid } = this.props;
+    getArticleById(articleid).then((article) => {
       this.setState({ articleInfo: article });
     });
   }
   render() {
-    const { articleInfo } = this.state;
+    const { articleInfo, voteChange } = this.state;
+    const { loggedin, articleid, user } = this.props;
     return (
       <div className="articlepage">
         <h3>Article info...</h3>
         {articleInfo && (
-          <ArticleCardTitle
-            voteChange={this.state.voteChange}
-            articleInfo={articleInfo}
-          />
+          <ArticleCardTitle voteChange={voteChange} articleInfo={articleInfo} />
         )}
-        {this.props.loggedin && (
+        {loggedin && (
           <>
-            <LikeButton onClick={() => this.handleVoteChange(1)} />
-            <DislikeButton onClick={() => this.handleVoteChange(-1)} />
+            <LikeButton
+              onClick={() => this.handleVoteChange(1)}
+              voteChange={voteChange}
+            />
+            <DislikeButton
+              onClick={() => this.handleVoteChange(-1)}
+              voteChange={voteChange}
+            />
           </>
         )}
         {articleInfo && (
           <>
             <ArticleCardInfo articleInfo={articleInfo} />
             <Comments
-              loggedin={this.props.loggedin}
-              articleid={this.props.articleid}
-              username={this.props.user}
+              loggedin={loggedin}
+              articleid={articleid}
+              username={user}
             />
           </>
         )}
@@ -49,8 +55,9 @@ export class ArticlePage extends React.Component {
     );
   }
   handleVoteChange = (amount) => {
-    addVoteToArticles(this.props.articleid, amount).catch((err) => {
-      console.log(err);
+    const { articleid } = this.props;
+    addVoteToArticles(articleid, amount).catch((err) => {
+      this.setState({ error: err });
     });
     this.setState((prevState) => {
       return { voteChange: prevState.voteChange + amount };

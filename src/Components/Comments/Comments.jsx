@@ -13,10 +13,8 @@ export class Comments extends React.Component {
     this.getComments();
   }
   componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.hasSubmitted &&
-      this.state.newComment !== prevState.newComment
-    ) {
+    const { hasSubmitted, newComment } = this.state;
+    if (hasSubmitted && newComment !== prevState.newComment) {
       this.getComments();
     }
   }
@@ -40,7 +38,7 @@ export class Comments extends React.Component {
                 <CommentCard
                   key={comment.comment_id}
                   comment={comment}
-                  loggedin={this.props.loggedin}
+                  loggedin={loggedin}
                 />
               </div>
             );
@@ -49,7 +47,8 @@ export class Comments extends React.Component {
     );
   }
   getComments = () => {
-    getCommentsByArticle(this.props.articleid).then((comments) => {
+    const { articleid } = this.props;
+    getCommentsByArticle(articleid).then((comments) => {
       this.setState({ commentsList: comments });
     });
   };

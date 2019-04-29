@@ -1,33 +1,21 @@
 .App {
   height: 100vh;
-  /* display: grid;
-  grid-template-columns: 10% 80% 10%;
-  grid-template-rows: 40% 50% 10%;
-  grid-template-areas:
-    'header header header'
-    'left-panel center right-panel'
-    'left-panel footer right-panel'; */
+
   text-align: center;
 }
 
 body {
   margin: 5px;
   padding: 0;
-  /* background-image: url('https://images.pexels.com/photos/235994/pexels-photo-235994.jpeg?cs=srgb&dl=bright-design-floor-235994.jpg&fm=jpg?dl&fit=crop&crop=entropy&w=640&h=400, https://www.pexels.com/photo/board-bright-design-fabric-235994/'); */
 }
 .topHeader {
   background-color: white;
 }
 .App > header {
-  /* grid-area: header; */
   text-align: center;
-}
-.App > h2 {
-  /* grid-area: center; */
 }
 
 .loginnavbar {
-  /* grid-area: header; */
   width: 32%;
   float: center;
 
@@ -35,7 +23,6 @@ body {
   background-color: #f44336;
 }
 nav {
-  /* grid-area: header; */
   border: 1px solid black;
   background-color: #f44336;
 }
@@ -54,7 +41,6 @@ nav {
   display: inline-block;
 }
 .commentslist {
-  /* grid-area: right-panel; */
   background-color: beige;
   overflow: scroll;
 }
@@ -62,21 +48,15 @@ nav {
   height: 100%;
   max-width: 100%;
   padding: 0;
-  margin: 0;
-  /* overflow-y: scroll; */
+  margin: 5px;
+
   overflow: scroll;
 }
 .login {
   text-align: left;
-  /* grid-area: header; */
 }
-/* .login > input {
-  width: 25%;
-  border: 2px solid red;
-  border-radius: 4px;
-} */
+
 .loginlink {
-  /* grid-area: header; */
   background-color: #f44336;
   color: white;
   text-align: center;
@@ -103,7 +83,6 @@ input[type='text'] {
   margin: auto;
 }
 .articlebody {
-  /* grid-area: center; */
   height: 60px;
   line-height: 20px;
 

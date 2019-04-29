@@ -12,10 +12,7 @@ export class Topics extends React.Component {
     });
   }
   render() {
-    return (
-      <div>
-        {this.state.topicList && <TopicList topics={this.state.topicList} />}
-      </div>
-    );
+    const { topicList } = this.state;
+    return <div>{topicList && <TopicList topics={topicList} />}</div>;
   }
 }
