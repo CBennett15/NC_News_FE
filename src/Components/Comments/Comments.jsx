@@ -39,6 +39,7 @@ export class Comments extends React.Component {
                   key={comment.comment_id}
                   comment={comment}
                   loggedin={loggedin}
+                  username={username}
                 />
               </div>
             );
