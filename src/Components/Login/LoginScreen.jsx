@@ -4,11 +4,11 @@ import { getUsersByUsername } from '../../Api';
 
 export class LoginScreen extends React.Component {
   state = {
-    userInput: '' || 'DefaultUser',
+    userInput: '',
     error: null,
   };
   render() {
-    const { userInput, error } = this.state;
+    const { error } = this.state;
     const { loggedin } = this.props;
     return (
       <LoginForm
@@ -16,14 +16,20 @@ export class LoginScreen extends React.Component {
         onSubmit={this.handleSubmit}
         onChange={this.handleTyping}
         onClick={this.handleLogout}
-        userInput={userInput}
         error={error}
+        handleGuest={this.handleGuest}
       />
     );
   }
   handleTyping = (event) => {
     const value = event.target.value;
     this.setState({ userInput: value });
+  };
+  handleGuest = (event) => {
+    const guest = event.target.value;
+    getUsersByUsername(guest).then((user) => {
+      this.props.logInUser(user.username);
+    });
   };
   handleSubmit = (event) => {
     const { userInput } = this.state;

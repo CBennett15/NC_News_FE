@@ -17,6 +17,7 @@ import { MyAccountPage } from './Components/MyAccount/MyAccountPage';
 import { Comments } from './Components/Comments/Comments';
 import { NotFound } from './Components/Errors/NotFound';
 import { UserComments } from './Components/Users/UserComments';
+// import { Users } from './Components/Users/Users';
 
 class App extends Component {
   state = {
@@ -33,14 +34,14 @@ class App extends Component {
     const { username, isUserLoggedIn } = this.state;
     return (
       <div className="App">
+        <Header />
         <LoginScreen
           logInUser={this.logInUser}
           loggedin={isUserLoggedIn}
           logOutUser={this.logOutUser}
         />
-        <Greeting user={username} loggedin={isUserLoggedIn} />
         <LoginNavBar loggedin={isUserLoggedIn} />
-        <Header />
+        <Greeting user={username} loggedin={isUserLoggedIn} />
         <Router>
           <Home path="/" />
           <Articles path="/articles" />
@@ -51,6 +52,7 @@ class App extends Component {
           />
           <Topics path="/topics/" />
           <TopicPage path="/topics/:slug" />
+          {/* <Users path="/users" /> */}
           <UserArticles loggedin={isUserLoggedIn} path="/users/:username/" />
           <UserComments
             loggedin={isUserLoggedIn}

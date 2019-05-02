@@ -5,20 +5,29 @@ export const LoginForm = ({
   onSubmit,
   loggedin,
   onClick,
-  userInput,
   error,
+  handleGuest,
 }) => {
   if (!loggedin)
     return (
-      <form className="login" onSubmit={onSubmit}>
-        <input type="text" onChange={onChange} value={userInput} />
-        <button>Login</button>
-        {error && (
-          <p className="error">
-            Sorry, invalid username, please try again or Sign Up
-          </p>
-        )}
-      </form>
+      <div>
+        <form className="login" onSubmit={onSubmit}>
+          <input
+            type="text"
+            onChange={onChange}
+            placeholder="Enter Username..."
+          />
+          <button>Login</button>
+          {error && (
+            <p className="error">
+              Sorry, invalid username, please try again or Sign Up
+            </p>
+          )}
+        </form>
+        <button onClick={handleGuest} value="Guest">
+          Login as Guest
+        </button>
+      </div>
     );
   return <button onClick={onClick}>Logout</button>;
 };

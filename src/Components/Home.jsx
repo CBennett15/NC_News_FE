@@ -15,7 +15,6 @@ export class Home extends React.Component {
     const { latestArticles } = this.state;
     return (
       <div>
-        <h2>Home Page...</h2>
         <h3>Latest Articles</h3>
         {latestArticles && <ArticleList articles={latestArticles} />}
       </div>

@@ -11,8 +11,6 @@ export class ArticlePage extends React.Component {
   state = {
     articleInfo: null,
     voteChange: 0,
-    voteLoading: null,
-    voteError: null,
     error: null,
   };
   componentDidMount() {

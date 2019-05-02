@@ -11,6 +11,7 @@ export const LoginNavBar = ({ loggedin }) => {
       )}
       {loggedin && (
         <Link className="loginlink" to="/myaccount">
+          <i className="fas fa-user" />
           My Account
         </Link>
       )}

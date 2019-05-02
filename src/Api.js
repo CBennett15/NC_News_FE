@@ -40,6 +40,11 @@ export const getCommentsByUser = (username) => {
     },
   );
 };
+export const getUsers = () => {
+  return Axios.get(`${url}/users`).then(({ data: { users } }) => {
+    return users;
+  });
+};
 export const getUsersByUsername = (username) => {
   return Axios.get(`${url}/users/${username}`).then(({ data: { user } }) => {
     return user;

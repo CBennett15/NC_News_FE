@@ -7,7 +7,7 @@ export const TopicList = ({ topics }) => {
       <h2>Topic list...</h2>
       {topics.map((topic) => {
         return (
-          <p key={topic.slug}>
+          <p key={topic.slug} className="topic_link">
             <Link to={`/topics/${topic.slug}`}>{topic.slug}</Link>
           </p>
         );
