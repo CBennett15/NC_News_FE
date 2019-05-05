@@ -10,7 +10,9 @@ export const ArticleList = ({ articles }) => {
             {article.title}
           </Link>
         </p>
-        <p className="articlebody">{article.body}</p>
+        <p className="articlebody">
+          {article.body.replace(/(.{120})..+/, '$1...')}
+        </p>
         <p>
           Comment Count: {article.comment_count}, Votes: {article.votes} created
           on: {article.created_at.slice(0, 10)}

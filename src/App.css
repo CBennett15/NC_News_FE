@@ -106,6 +106,16 @@ textarea {
   background-color: #f8f8f8;
   resize: vertical;
 }
+.readmore {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  border-bottom: 1px solid #444;
+  cursor: pointer;
+  font-size: x-small;
+}
 button {
   border: 1px solid black;
 }

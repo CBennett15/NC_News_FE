@@ -25,13 +25,14 @@ export class AddComment extends React.Component {
     const { articleid, username, submitComment } = this.props;
     const { commentInput } = this.state;
     event.preventDefault();
+    event.target.reset();
     addNewComment(articleid, {
       username: username,
       body: commentInput,
     })
       .then((comment) => {
         submitComment(comment);
-        this.setState({ error: null });
+        this.setState({ commentInput: '', error: null });
       })
       .catch((err) => {
         this.setState({ error: err });

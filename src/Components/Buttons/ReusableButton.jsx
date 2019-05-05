@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const ReusableButton = ({ onClick, text, value }) => {
+export const ReusableButton = ({ onClick, text, value, className }) => {
   return (
-    <button value={value} onClick={onClick}>
+    <button className={className} value={value} onClick={onClick}>
       {text}
     </button>
   );
