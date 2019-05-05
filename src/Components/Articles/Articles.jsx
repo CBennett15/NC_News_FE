@@ -18,7 +18,7 @@ export class Articles extends React.Component {
 
     return (
       <div>
-        <h2>Articles...</h2>
+        <h2>All Articles</h2>
         <ReusableButton
           value="created_at"
           onClick={this.handleClick}

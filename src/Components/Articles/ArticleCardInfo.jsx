@@ -12,7 +12,6 @@ export const ArticleCardInfo = ({ articleInfo }) => {
         Topic:{' '}
         <Link to={`/topics/${articleInfo.topic}`}>{articleInfo.topic}</Link>
       </p>
-      <p>Comment Count: {articleInfo.comment_count}</p>
     </div>
   );
 };

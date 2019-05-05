@@ -1,12 +1,12 @@
 .App {
   height: 100vh;
-
   text-align: center;
 }
 
 body {
   margin: 5px;
   padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .topHeader {
   background-color: white;
@@ -85,9 +85,6 @@ input[type='text'] {
 .articlebody {
   height: 60px;
   line-height: 20px;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .greeting {
@@ -126,6 +123,7 @@ button {
 .article,
 .comment_card {
   border: 1px solid black;
+  margin: 5px;
 }
 .dropdown {
   position: relative;
@@ -144,4 +142,9 @@ button {
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+.articleinfo {
+  font-size: smaller;
+  color: lightslategray;
+  text-align: center;
 }
