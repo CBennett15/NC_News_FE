@@ -14,7 +14,7 @@ export class DeleteComment extends React.Component {
   handleDeleteButton = () => {
     const { comment_id, hasDeletedComment } = this.props;
     deleteComment(comment_id).then(() => {
-      hasDeletedComment();
+      hasDeletedComment(comment_id);
     });
   };
 }

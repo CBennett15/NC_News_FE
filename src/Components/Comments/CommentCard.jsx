@@ -8,11 +8,10 @@ export class CommentCard extends React.Component {
   state = {
     voteChange: 0,
     error: null,
-    hasDeleted: null,
   };
 
   render() {
-    const { comment, loggedin, username } = this.props;
+    const { comment, loggedin, username, hasDeletedComment } = this.props;
     const { voteChange } = this.state;
 
     return (
@@ -34,7 +33,7 @@ export class CommentCard extends React.Component {
             {username === comment.author && (
               <DeleteComment
                 comment_id={comment.comment_id}
-                hasDeletedComment={this.hasDeletedComment}
+                hasDeletedComment={hasDeletedComment}
               />
             )}
           </>
@@ -50,9 +49,5 @@ export class CommentCard extends React.Component {
     this.setState((prevState) => {
       return { voteChange: prevState.voteChange + amount };
     });
-  };
-  hasDeletedComment = () => {
-    this.setState({ hasDeleted: true });
-    alert('this comment has been deleted');
   };
 }

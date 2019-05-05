@@ -40,6 +40,7 @@ export class Comments extends React.Component {
                   comment={comment}
                   loggedin={loggedin}
                   username={username}
+                  hasDeletedComment={this.hasDeletedComment}
                 />
               </div>
             );
@@ -59,5 +60,12 @@ export class Comments extends React.Component {
   };
   submitComment = (comment) => {
     this.setState({ newComment: comment, hasSubmitted: true });
+  };
+  hasDeletedComment = (comment_id) => {
+    const newCommentsList = this.state.commentsList.filter(
+      (comment) => comment.comment_id !== comment_id,
+    );
+    this.setState({ commentsList: newCommentsList });
+    alert('this comment has been deleted');
   };
 }

@@ -9,20 +9,13 @@ import { NotFound } from '../Errors/NotFound';
 export class UserComments extends React.Component {
   state = {
     userComments: null,
-    hasDeleted: false,
     error: null,
   };
   componentDidMount() {
     const { username } = this.props;
     this.getAllCommentsByUser(username);
   }
-  componentDidUpdate(prevProps, prevState) {
-    const { hasDeleted } = this.state;
-    const { username } = this.props;
-    if (hasDeleted) {
-      this.getAllCommentsByUser(username);
-    }
-  }
+
   render() {
     const { userComments, error } = this.state;
     const { loggedin, username } = this.props;
@@ -83,8 +76,11 @@ export class UserComments extends React.Component {
         this.setState({ error: err });
       });
   };
-  hasDeletedComment = () => {
-    this.setState({ hasDeleted: true });
+  hasDeletedComment = (comment_id) => {
+    const newUserList = this.state.userComments.filter(
+      (comment) => comment.comment_id !== comment_id,
+    );
+    this.setState({ userComments: newUserList });
     alert('this comment has been deleted');
   };
 }
