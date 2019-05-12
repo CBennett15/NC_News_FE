@@ -10,14 +10,12 @@ import { ArticlePage } from './Components/Articles/ArticlePage';
 import { TopicPage } from './Components/Topics/TopicPage';
 import { UserArticles } from './Components/Users/UserArticles';
 import { LoginScreen } from './Components/Login/LoginScreen';
-import { LoginNavBar } from './Components/Header/LoginNavBar';
 import { RegisterScreen } from './Components/Register/RegisterScreen';
 import { Greeting } from './Components/Login/Greeting';
 import { MyAccountPage } from './Components/MyAccount/MyAccountPage';
 import { Comments } from './Components/Comments/Comments';
 import { NotFound } from './Components/Errors/NotFound';
 import { UserComments } from './Components/Users/UserComments';
-// import { Users } from './Components/Users/Users';
 
 class App extends Component {
   state = {
@@ -34,13 +32,12 @@ class App extends Component {
     const { username, isUserLoggedIn } = this.state;
     return (
       <div className="App">
-        <Header />
+        <Header loggedin={isUserLoggedIn} user={username} />
         <LoginScreen
           logInUser={this.logInUser}
           loggedin={isUserLoggedIn}
           logOutUser={this.logOutUser}
         />
-        <LoginNavBar loggedin={isUserLoggedIn} />
         <Greeting user={username} loggedin={isUserLoggedIn} />
         <Router>
           <Home path="/" />
@@ -52,7 +49,7 @@ class App extends Component {
           />
           <Topics path="/topics/" />
           <TopicPage path="/topics/:slug" />
-          {/* <Users path="/users" /> */}
+
           <UserArticles loggedin={isUserLoggedIn} path="/users/:username/" />
           <UserComments
             loggedin={isUserLoggedIn}

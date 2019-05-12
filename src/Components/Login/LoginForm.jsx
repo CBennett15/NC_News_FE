@@ -10,7 +10,7 @@ export const LoginForm = ({
 }) => {
   if (!loggedin)
     return (
-      <div>
+      <div className="loginform">
         <form className="login" onSubmit={onSubmit}>
           <input
             type="text"

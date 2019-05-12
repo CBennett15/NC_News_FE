@@ -34,7 +34,7 @@ export class UserComments extends React.Component {
         {userComments &&
           userComments.map((comment) => {
             return (
-              <div key={comment.comment_id}>
+              <div key={comment.comment_id} className="commentbody">
                 <p>
                   Article ID:{' '}
                   <Link

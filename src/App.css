@@ -1,12 +1,17 @@
 .App {
   height: 100vh;
   text-align: center;
+  margin: 20px;
 }
 
 body {
   margin: 5px;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+* {
+  box-sizing: border-box;
 }
 .topHeader {
   background-color: white;
@@ -15,15 +20,7 @@ body {
   text-align: center;
 }
 
-.loginnavbar {
-  width: 32%;
-  float: center;
-
-  border: 1px solid black;
-  background-color: #f44336;
-}
 nav {
-  border: 1px solid black;
   background-color: #f44336;
 }
 
@@ -49,11 +46,7 @@ nav {
   max-width: 100%;
   padding: 0;
   margin: 5px;
-
   overflow: scroll;
-}
-.login {
-  text-align: left;
 }
 
 .loginlink {
@@ -66,21 +59,65 @@ nav {
 input[type='text'] {
   border: 2px solid red;
   border-radius: 4px;
-  float: center;
+  display: inline-block;
   padding: 8px 20px;
   margin: 5px 0;
   background-color: lightgray;
   color: black;
 }
-.register {
-  width: 50%;
-  align-content: center;
-  margin: auto;
-  grid-area: center;
+div.registerform {
+  position: relative;
+  text-align: right;
 }
-.register > input[type='text'] {
-  width: 100%;
-  margin: auto;
+div.registerform > label {
+  width: 30%;
+  position: absolute;
+  left: 10%;
+  text-align: right;
+  margin-right: 30px;
+}
+
+div.registerform > label {
+  width: 30%;
+  text-align: right;
+}
+div .label + input {
+  width: 30%;
+  margin: 0 30% 0 4%;
+}
+.registerform {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+div.loginform {
+  display: block;
+  text-align: center;
+}
+form {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+div.addcommentform {
+  display: block;
+  text-align: center;
+}
+.addcommentform {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+@media (max-width: 800px) {
+  .registerform > input {
+    margin: 10px 0;
+  }
+  .registerform {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 .articlebody {
   height: 60px;
@@ -88,7 +125,7 @@ input[type='text'] {
 }
 
 .greeting {
-  text-align: left;
+  text-align: center;
 }
 ul {
   list-style-type: none;
@@ -113,38 +150,59 @@ textarea {
   cursor: pointer;
   font-size: x-small;
 }
+
 button {
   border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+}
+button:hover {
+  color: #333333;
+  border: 1px solid #a4a4a4;
+  border-top: 2px solid #b2b2b2;
+  background-color: #a0dbc4;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#a8cfce),
+    to(#beeae9)
+  );
+  background: -moz-linear-gradient(top, #a8cfce, #beeae9);
+  background: -o-linear-gradient(top, #a8cfce, #beeae9);
+  background: -ms-linear-gradient(top, #a8cfce, #beeae9);
+}
+.topic_link {
+  text-decoration: none;
 }
 .error {
   font-size: 15px;
   color: red;
 }
-.article,
-.comment_card {
+.article {
   border: 1px solid black;
   margin: 5px;
 }
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+.comment_card {
+  margin: 40px;
+  padding: 5px;
+  border: 2px solid gray;
+  overflow: scroll;
 }
 .articleinfo {
   font-size: smaller;
   color: lightslategray;
   text-align: center;
+}
+
+div.commentbody {
+  margin: 5px;
+  padding: 5px;
+  border: 1px dotted gray;
+  background-color: whitesmoke;
+  width: 50%;
+  display: inline-block;
+}
+div.commentbody > .comment_card {
+  border: none;
 }
