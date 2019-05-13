@@ -10,9 +10,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
-* {
-  box-sizing: border-box;
-}
+
 .topHeader {
   background-color: white;
 }
@@ -186,7 +184,8 @@ button:hover {
 .comment_card {
   margin: 40px;
   padding: 5px;
-  border: 2px solid gray;
+  border: 2px dotted gray;
+  float: inline-start;
   overflow: scroll;
 }
 .articleinfo {
@@ -196,12 +195,10 @@ button:hover {
 }
 
 div.commentbody {
-  margin: 5px;
-  padding: 5px;
+  margin: 10px;
   border: 1px dotted gray;
   background-color: whitesmoke;
-  width: 50%;
-  display: inline-block;
+  float: left;
 }
 div.commentbody > .comment_card {
   border: none;

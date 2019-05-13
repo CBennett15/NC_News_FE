@@ -6,18 +6,11 @@ import { AddComment } from './AddComment';
 export class Comments extends React.Component {
   state = {
     commentsList: null,
-    newComment: null,
-    hasSubmitted: false,
   };
   componentDidMount() {
     this.getComments();
   }
-  componentDidUpdate(prevProps, prevState) {
-    const { hasSubmitted, newComment } = this.state;
-    if (hasSubmitted && newComment !== prevState.newComment) {
-      this.getComments();
-    }
-  }
+
   render() {
     const { username, loggedin, articleid } = this.props;
     const { commentsList } = this.state;
@@ -59,7 +52,10 @@ export class Comments extends React.Component {
       });
   };
   submitComment = (comment) => {
-    this.setState({ newComment: comment, hasSubmitted: true });
+    const { commentsList } = this.state;
+    this.setState({
+      commentsList: [comment, ...commentsList],
+    });
   };
   hasDeletedComment = (comment_id) => {
     const newCommentsList = this.state.commentsList.filter(
