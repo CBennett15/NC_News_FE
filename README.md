@@ -1,6 +1,6 @@
 # Northcoder News - Front End
 
-Northcoder News is a responsive web abb project built in React that serves as a news aggregation and commentary board.
+Northcoder News is a responsive web app project built in React that serves as a news aggregation and commentary board.
 
 The project can be found hosted here: https://nc-news-cb.netlify.com/
 
