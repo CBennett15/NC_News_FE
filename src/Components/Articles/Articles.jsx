@@ -3,19 +3,22 @@ import { getArticles } from '../../Api';
 import { ArticleList } from './ArticleList';
 import { NotFound } from '../Errors/NotFound';
 import { ReusableButton } from '../Buttons/ReusableButton';
+import { Loading } from '../Loading';
 
 export class Articles extends React.Component {
   state = {
     articlesList: null,
     error: null,
+    isLoading: true,
   };
   componentDidMount() {
     this.fetchArticles({});
+    this.setState({ isLoading: false });
   }
 
   render() {
-    const { articlesList, error } = this.state;
-
+    const { articlesList, error, isLoading } = this.state;
+    if (isLoading) return <Loading />;
     return (
       <div>
         <h2>All Articles</h2>
