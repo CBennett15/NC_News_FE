@@ -21,7 +21,14 @@ export class MyAccountPage extends React.Component {
         <h2>Welcome Back {user}</h2>
         <ul>
           <li>{userInfo.name}</li>
-          <img src={userInfo.avatar_url} alt="user-avatar" />
+          {userInfo && userInfo.avatar_url.length > 10 ? (
+            <img src={userInfo.avatar_url} alt="user-avatar" />
+          ) : (
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtqA_k5l5m7Y38uSjdEVU7pZ1bz5v4038y_28flDqmjjsZAyCzmw"
+              alt="user-avatar"
+            />
+          )}
         </ul>
         <ReusableButton
           onClick={() => navigate(`/users/${user}`)}

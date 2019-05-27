@@ -81,6 +81,5 @@ export class UserComments extends React.Component {
       (comment) => comment.comment_id !== comment_id,
     );
     this.setState({ userComments: newUserList });
-    alert('this comment has been deleted');
   };
 }
