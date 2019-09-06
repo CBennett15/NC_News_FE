@@ -12,11 +12,14 @@ export const LoginForm = ({
     return (
       <div className="loginform">
         <form className="login" onSubmit={onSubmit}>
-          <input
-            type="text"
-            onChange={onChange}
-            placeholder="Enter Username..."
-          />
+          <label>
+            Enter Username:
+            <input
+              type="text"
+              onChange={onChange}
+              placeholder="Enter Username..."
+            />
+          </label>
           <button>Login</button>
           {error && (
             <p className="error">
